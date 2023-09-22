@@ -1,0 +1,57 @@
+import { createRouter, createWebHistory } from 'vue-router'
+
+const newsDetail = ()=> import('../views/NewsDetail.vue');
+
+const router = createRouter({
+  history: createWebHistory(import.meta.env.BASE_URL),
+  scrollBehavior(to, from ,savedPosition){
+
+    if(savedPosition) {
+      return savedPosition;
+    }else {
+      return {top: 0}
+    }
+  },
+  routes: [
+    {
+      path: '',
+      redirect: '/home',
+    },
+    {
+      path: '/home',
+      name: 'home',
+      component: () => import('../views/Home.vue')
+    },
+    {
+      path: '/about',
+      name: 'about',
+      component: () => import('../views/About.vue')
+    },
+    {
+      path: '/product',
+      name: 'product',
+      component: () => import('../views/Product.vue')
+    },
+    {
+      path: '/blockChain',
+      name: 'blockChain',
+      component: () => import('../views/BlockChain.vue')
+    },
+    {
+      path: '/news',
+      name: 'news',
+      component: () => import('../views/News.vue'),
+      meta: {
+        keepAlive: true,
+        componentName: 'News',// 最好和文件名称一致
+      }
+    },
+    {
+      path: '/newsDetail/:id',
+      name: 'newsDetail',
+      component: newsDetail,
+    }
+  ]
+})
+
+export default router
