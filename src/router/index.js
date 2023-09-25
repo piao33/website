@@ -3,6 +3,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 const newsDetail = ()=> import('../views/NewsDetail.vue');
 
 const router = createRouter({
+  base: '/',
   history: createWebHistory(import.meta.env.BASE_URL),
   scrollBehavior(to, from ,savedPosition){
 
@@ -50,7 +51,11 @@ const router = createRouter({
       path: '/newsDetail/:id',
       name: 'newsDetail',
       component: newsDetail,
-    }
+    },
+    {
+      path: '/:error*',
+      redirect: '/home',
+    },
   ]
 })
 
