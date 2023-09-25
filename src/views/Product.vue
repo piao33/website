@@ -11,8 +11,8 @@
 </template>
 <script setup>
 import img1 from '@/assets/img/szjr.jpg';
-import img2 from '@/assets/img/lsdt.jpeg';
-import img3 from '@/assets/img/rzzl.jpeg';
+import img2 from '@/assets/img/rzzl.jpeg';
+import img3 from '@/assets/img/jrmy.jpeg';
 import img4 from '@/assets/img/zsfw.jpeg';
 import img5 from '@/assets/img/szbq.jpg';
 import img6 from '@/assets/img/szzf.jpeg';
