@@ -1,4 +1,4 @@
-import requests from '../index';
+import requests from '../axios';
 
 function getNewsListApi(data) {
     return requests({

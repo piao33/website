@@ -3,7 +3,7 @@
         <div class="nav-box">
             <div class="logo-box">
                 <img src="@/assets/svg/logo.svg" alt="logo" @click="$router.push('home')">
-                <span>区块链平台</span>
+                <span>国网吉林省电力有限公司-区块链应用平台</span>
             </div>
             <div class="menu-box">
                 <div class="menu-item" v-for="(menu_item, index) in menu" :key="index">

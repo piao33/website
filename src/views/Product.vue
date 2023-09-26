@@ -11,13 +11,13 @@
 </template>
 <script setup>
 import img1 from '@/assets/img/szjr.jpg';
-import img2 from '@/assets/img/rzzl.jpeg';
+import img2 from '@/assets/img/rzzl.jpg';
 import img3 from '@/assets/img/jrmy.jpeg';
 import img4 from '@/assets/img/zsfw.jpeg';
 import img5 from '@/assets/img/szbq.jpg';
 import img6 from '@/assets/img/szzf.jpeg';
 import img7 from '@/assets/img/xnyy.jpg';
-import img8 from '@/assets/img/tpfjk.jpg';
+import img8 from '@/assets/img/tsc.jpg';
 import img9 from '@/assets/img/ywhf.jpg';
 
 import { reactive } from 'vue';

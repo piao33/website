@@ -52,7 +52,7 @@
     
     onActivated(()=>{
         // onactiive
-        console.log('active')
+        // console.log('active')
     })
 
     function jumpToDetail(id) {
