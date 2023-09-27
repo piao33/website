@@ -22,23 +22,26 @@
                 </div>
             </swiper-slide>
         </Swiper>
-        <!-- <h2 class="title">为建设具有中国特色国际领先的能源互联网企业而奋斗</h2> -->
-        <div class="energy">
-            <div class="energy-img">
-                <img :src="notice.coverImage" alt="">
+        <div class="content">
+
+            <p class="title" :title="notice.title">{{notice.title}}</p>
+            <div class="energy">
+                <div class="energy-img">
+                    <img :src="notice.coverImage" alt="">
+                </div>
+                <div class="energy-text">
+                    <div v-html="notice.contentHtml"></div>
+                </div>
             </div>
-            <div class="energy-text">
-                <p class="title">{{notice.title}}</p>
-                <div v-html="notice.contentHtml"></div>
-            </div>
-        </div>
-        <div class="energy">
-            <div class="energy-img">
-                <img :src="special.coverImage" alt="">
-            </div>
-            <div class="energy-text">
-                <p class="title">{{special.title}}</p>
-                <div v-html="special.contentHtml"></div>
+            <p class="title" :title="special.title">{{special.title}}</p>
+            <div class="energy">
+                <div class="energy-img">
+                    <img :src="special.coverImage" alt="">
+                </div>
+                <div class="energy-text">
+                    
+                    <div v-html="special.contentHtml"></div>
+                </div>
             </div>
         </div>
     </div>
@@ -95,8 +98,16 @@ import { reactive, ref } from 'vue';
 <style lang="less" scoped>
     .homepage{
         text-align: center;
-        h2{
-            color: @green;
+        .content{
+            .max1280();
+            margin: 20px auto 0;
+            .title{
+                font-size: 20px;
+                color: @green;
+                margin-bottom: 16px;
+                width: 50%;
+                .one-line-ellipsis();
+            }
         }
         .home-swiper{
             height: 500px;
@@ -118,21 +129,15 @@ import { reactive, ref } from 'vue';
             }
         }
         .energy{
-            .max1280();
-            margin: 20px auto 0;
             display: flex;
             align-items: flex-start;
             justify-content: flex-start;
+            margin-bottom: 24px;
             .energy-text{
                 margin-left: 20px;
                 flex-shrink: 1;
                 text-align: left;
                 color: @gray;
-                .title{
-                    font-size: 20px;
-                    color: @green;
-                    margin-bottom: 16px;
-                }
             }
             .energy-img{
                 flex-shrink: 0;
