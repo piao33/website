@@ -4,6 +4,9 @@
 @import './quill/bubble.css';
 @import './base.css';
 
+.ql-editor{
+  line-height: 1.66;
+}
 #app {
   margin: 0 auto;
   font-weight: normal;

@@ -25,7 +25,6 @@
         detail.value = data;
     }
     getNewsDetail();
-
 </script>
 <style lang="less" scoped>
     .newsDetail{
