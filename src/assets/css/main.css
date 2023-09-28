@@ -1,4 +1,7 @@
 @import './clear.css';
+@import './quill/core.css';
+@import './quill/snow.css';
+@import './quill/bubble.css';
 @import './base.css';
 
 #app {

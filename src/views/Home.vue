@@ -30,7 +30,7 @@
                     <img :src="notice.coverImage" alt="">
                 </div>
                 <div class="energy-text">
-                    <div v-html="notice.contentHtml"></div>
+                    <div class="ql-editor" v-html="notice.contentHtml"></div>
                 </div>
             </div>
             <p class="title" :title="special.title">{{special.title}}</p>
@@ -39,8 +39,7 @@
                     <img :src="special.coverImage" alt="">
                 </div>
                 <div class="energy-text">
-                    
-                    <div v-html="special.contentHtml"></div>
+                    <div class="ql-editor" v-html="special.contentHtml"></div>
                 </div>
             </div>
         </div>
@@ -94,7 +93,9 @@ import { reactive, ref } from 'vue';
     }
 
 </script>
+<style>
 
+</style>
 <style lang="less" scoped>
     .homepage{
         text-align: center;
@@ -134,10 +135,10 @@ import { reactive, ref } from 'vue';
             justify-content: flex-start;
             margin-bottom: 24px;
             .energy-text{
-                margin-left: 20px;
+                // margin-left: 20px;
                 flex-shrink: 1;
-                text-align: left;
-                color: @gray;
+                // text-align: left;
+                // color: @gray;
             }
             .energy-img{
                 flex-shrink: 0;

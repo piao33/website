@@ -8,7 +8,7 @@
                 <span title="浏览量">{{ detail.browseNum }}</span>
             </p>
         </div>
-        <div class="content" v-html="detail.contentHtml"></div>
+        <div class="content ql-editor" v-html="detail.contentHtml"></div>
     </div>
 </template>
 <script setup>
