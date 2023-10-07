@@ -10,6 +10,7 @@ import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 export default defineConfig({
   server:{
     host: "192.168.1.12",
+    port: '8080',
     // port: '8080',
     // proxy:{
     //   '/profile': {

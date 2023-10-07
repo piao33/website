@@ -70,15 +70,15 @@ import { reactive, ref } from 'vue';
     getBanner();
 
     async function getSpecial() {
-        let {data} = await getSpecialApi();
-        data.contentHtml = safeHtml(data.contentHtml)
+        let {data={}} = await getSpecialApi();
+        data.contentHtml = safeHtml(data?.contentHtml)
         special.value = data
     }
     getSpecial();
 
     async function getNotice() {
-        let {data} = await getNoticeApi();
-        data.contentHtml = safeHtml(data.contentHtml)
+        let {data={}} = await getNoticeApi();
+        data.contentHtml = safeHtml(data?.contentHtml)
         notice.value = data
     }
     getNotice();

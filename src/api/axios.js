@@ -11,7 +11,6 @@ const instance = axios.create({
 // 请求拦截器
 instance.interceptors.request.use(function(config) {
     // 在请求发出前做些操作
-    // console.log('拦截器config',config)
     config.data = qs.stringify(config.data)
     return config;
 },function(error){
@@ -23,7 +22,6 @@ instance.interceptors.request.use(function(config) {
 // 响应拦截器
 instance.interceptors.response.use(function(response){
     // 对响应数据做操作
-    // console.log('拦截器response',response)
     return response
 },function(error){
     console.log(error)
@@ -36,14 +34,14 @@ async function requests(config) {
     let {status, data = {}, statusText, message} = await instance(config);
     // debugger
     if(200 <= status && status < 300) {// 请求成功
-        return data;
+        // 
     }else if(status == 401){// 请求失败
          // 未登录
     }else{
         // statusText
-        data.msg = statusText || message;
-        return data;
+        data.msg = statusText || message || 'request error';
     }
+    return data;
 }
 
 
