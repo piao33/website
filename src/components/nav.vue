@@ -30,7 +30,7 @@
                     </span>
                     <template #dropdown>
                         <el-dropdown-menu>
-                            <el-dropdown-item @click="go">个人信息</el-dropdown-item>
+                            <el-dropdown-item @click="jumpPlatform">个人信息</el-dropdown-item>
                             <el-dropdown-item @click="logout">退出</el-dropdown-item>
                         </el-dropdown-menu>
                     </template>
@@ -82,7 +82,7 @@
             router.push('/web/login')
         }
     }
-    let go = ()=>{
+    let jumpPlatform = ()=>{
         router.push('/platform')
     }
 </script>
