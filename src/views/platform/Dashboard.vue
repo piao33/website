@@ -104,7 +104,7 @@
     const rules = reactive({
         name: [
             { required: true, message: '请输入用户名称', trigger: 'change' },
-            { min: 3, max: 5, message: '用户名长度在 3-5 个字之间', trigger: 'blur' },
+            { max: 10, message: '用户名长度限制10个字', trigger: 'blur' },
         ],
         password: [
             { required: true,pattern: new RegExp('^[a-zA-Z0-9]{8,16}$'), message: '密码长度限制 8-16 位，支持数字和字母', trigger: 'blur'},

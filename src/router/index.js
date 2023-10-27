@@ -93,7 +93,6 @@ const router = createRouter({
 router.beforeEach((to, from, next)=>{
     const store = useUserStore()
     store.initUser()
-    console.log(from, to,to.meta?.needLogin, store.isLogin, store.user)
     if(to.meta?.needLogin && !store.isLogin) {
         return next('/web/login')
     }else {
