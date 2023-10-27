@@ -1,4 +1,5 @@
 <template>
+    <mNav></mNav>
     <div class="news">
         <ul>
             <li v-for="(item,index) in news_list" :key="index" @click="jumpToDetail(item.id)">

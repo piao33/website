@@ -1,4 +1,5 @@
 <template>
+    <mNav></mNav>
     <div class="product">
         <ul class="product-list">
             <li v-for="(item,index) in product_list" :key="index">

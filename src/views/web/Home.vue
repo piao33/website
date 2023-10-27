@@ -1,4 +1,5 @@
 <template>
+    <mNav></mNav>
     <div class="homepage">
         <Swiper
             class="home-swiper"

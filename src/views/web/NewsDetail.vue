@@ -1,4 +1,5 @@
 <template>
+    <mNav></mNav>
     <div class="newsDetail">
         <div class="title-box">
             <p class="title">{{ detail.title }}</p>

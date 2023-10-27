@@ -1,5 +1,6 @@
 import axios from "axios";
 import qs from 'qs';
+import { useUserStore } from "@/stores/user";
 
 // 默认配置
 const instance = axios.create({
@@ -11,7 +12,12 @@ const instance = axios.create({
 // 请求拦截器
 instance.interceptors.request.use(function(config) {
     // 在请求发出前做些操作
-    config.data = qs.stringify(config.data)
+    // config.data = qs.stringify(config.data)
+
+    let user = JSON.parse(localStorage.getItem('user') || '{}')
+    config.headers.tel = user.tel;
+    config.headers.token = user.token;
+
     return config;
 },function(error){
     console.log(error)
@@ -22,6 +28,28 @@ instance.interceptors.request.use(function(config) {
 // 响应拦截器
 instance.interceptors.response.use(function(response){
     // 对响应数据做操作
+    
+    if(response?.data?.code == '401') {        
+        ElMessageBox.alert(
+            response?.data?.msg || '登录状态已过期，请登录后重试',
+            '提示',
+            {
+                autofocus: false,
+                "show-close": false,
+                confirmButtonText: '去登录',
+                "show-cancel-button": false,
+                type: 'warning',
+                center: true,
+            }
+        )
+        .then(()=>{
+            const store = useUserStore()
+            store.clearUser()
+            let url = encodeURIComponent(location.pathname)
+            location.href = `/web/login?returnUrl=${url}`
+        })
+        throw new Error('登录状态失效')
+    }
     return response
 },function(error){
     console.log(error)

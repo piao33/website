@@ -1,4 +1,5 @@
 <template>
+    <mNav></mNav>
     <div class="blockChain">
         <h2>区块链四大特点</h2>
         <p class="strong"><img src="@/assets/svg/overview.svg" alt="">概述</p>

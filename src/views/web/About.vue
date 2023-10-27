@@ -1,4 +1,5 @@
 <template>
+    <mNav></mNav>
     <div class="bg-banner"></div>
     <div class="about">
         <div class="box comp-desc">
