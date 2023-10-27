@@ -181,7 +181,7 @@
                 message: '更新成功',
                 type: 'success',
             })
-            store.setUser({name: form.value.name, userPwd: form.value.newPassword})
+            store.setUser({userName: form.value.name, userPwd: form.value.newPassword})
         }else {
             ElMessage({
                 message: msg || '修改失败，请重试',
