@@ -32,8 +32,8 @@
                     <el-form-item prop="legalPerson" label="企业法人：" v-if="!isLoginType && form.userType == 'company'">
                         <el-input key="legalPerson" v-model="form.legalPerson" />
                     </el-form-item>
-                    <el-form-item prop="companyCode" label="企业代码：" v-if="!isLoginType && form.userType == 'company'">
-                        <el-input key="companyCode" v-model="form.companyCode" />
+                    <el-form-item prop="creditCode" label="企业代码：" v-if="!isLoginType && form.userType == 'company'">
+                        <el-input key="creditCode" v-model="form.creditCode" />
                     </el-form-item>
                     <el-form-item prop="name" label="用户名称：" v-if="!isLoginType">
                         <el-input key="name" v-model="form.name" />
@@ -102,7 +102,7 @@
         // nickName: '',
         companyName: '',
         legalPerson: '',
-        companyCode: '',
+        creditCode: '',
         telNumber: '',
         code: '',
         password: '',
@@ -122,7 +122,7 @@
             {required: true, message: '请输入法人姓名', trigger: 'change'},
             {max: 10, message: '法人姓名限制10个字', trigger: 'blur' },
         ],
-        companyCode: [
+        creditCode: [
             { required: true, pattern: new RegExp('^[0-9a-zA-Z]*$', 'gi'), message: '请输入企业代码', trigger: 'change'},
         ],
         telNumber: [
@@ -167,7 +167,7 @@
             userName: form.value.name,
             companyName: form.value.companyName,
             legalPerson: form.value.legalPerson,
-            companyCode: form.value.companyCode,
+            creditCode: form.value.creditCode,
             status: 0,
             tel: form.value.telNumber
         })

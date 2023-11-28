@@ -45,11 +45,17 @@
             <el-form-item prop="companyName" label="公司名称：" v-if="form.companyName">
                 <el-input v-model="form.companyName" disabled/>
             </el-form-item>
-            <el-form-item prop="name" label="用户名称：">
-                <el-input v-model="form.name" />
+            <el-form-item prop="legalPerson" label="法人姓名：" v-if="form.legalPerson">
+                <el-input v-model="form.legalPerson" disabled/>
+            </el-form-item>
+            <el-form-item prop="creditCode" label="公司代码：" v-if="form.creditCode">
+                <el-input v-model="form.creditCode" disabled/>
             </el-form-item>
             <el-form-item label="手机号：">
                 <el-input v-model="form.telNumber" disabled/>
+            </el-form-item>
+            <el-form-item prop="name" label="用户名称：">
+                <el-input v-model="form.name" />
             </el-form-item>
 
             <el-form-item prop="password" label="原密码：">
@@ -96,6 +102,8 @@
         userType: 'person',
         name: '',
         companyName: '',
+        creditCode: '',
+        legalPerson: '',
         telNumber: '',
         password: '',
         newPassword: '',
@@ -149,6 +157,8 @@
             form.value.name = data.userName
             form.value.telNumber = data.tel
             form.value.companyName = data.companyName
+            form.value.creditCode = data.creditCode
+            form.value.legalPerson = data.legalPerson
         }else {
             ElMessage({
                 message: msg || '请求失败，请重试',
