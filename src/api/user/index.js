@@ -1,10 +1,10 @@
 import requests from '../axios';
 
-function signInApi({userType, userPwd,userName,companyName,status,tel}) {
+function signInApi({userType, userPwd,userName,companyName,legalPerson, companyCode,status,tel}) {
     return requests({
         method: 'post',
         url: '/business/web/addRegisterUser',
-        data: {userType, userPwd,userName,companyName,status,tel}
+        data: {userType, userPwd,userName,companyName,legalPerson, companyCode, status,tel}
     })
 }
 

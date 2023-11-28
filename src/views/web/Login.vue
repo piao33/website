@@ -25,8 +25,15 @@
                             <el-option label="公司" value="company" />
                         </el-select>
                     </el-form-item>
+                    <!-- 增加 企业法人 和 组织代码  -->
                     <el-form-item prop="companyName" label="公司名称：" v-if="form.userType == 'company'">
                         <el-input key="companyName" v-model="form.companyName" />
+                    </el-form-item>
+                    <el-form-item prop="legalPerson" label="企业法人：" v-if="!isLoginType && form.userType == 'company'">
+                        <el-input key="legalPerson" v-model="form.legalPerson" />
+                    </el-form-item>
+                    <el-form-item prop="companyCode" label="企业代码：" v-if="!isLoginType && form.userType == 'company'">
+                        <el-input key="companyCode" v-model="form.companyCode" />
                     </el-form-item>
                     <el-form-item prop="name" label="用户名称：" v-if="!isLoginType">
                         <el-input key="name" v-model="form.name" />
@@ -94,6 +101,8 @@
         name: '',
         // nickName: '',
         companyName: '',
+        legalPerson: '',
+        companyCode: '',
         telNumber: '',
         code: '',
         password: '',
@@ -109,8 +118,15 @@
             {required: true, message: '请输入公司名称', trigger: 'change'},
             { max: 20, message: '公司名长度限制20个字', trigger: 'blur' },
         ],
+        legalPerson: [
+            {required: true, message: '请输入法人姓名', trigger: 'change'},
+            {max: 10, message: '法人姓名限制10个字', trigger: 'blur' },
+        ],
+        companyCode: [
+            { required: true, pattern: new RegExp('^[0-9a-zA-Z]*$', 'gi'), message: '请输入企业代码', trigger: 'change'},
+        ],
         telNumber: [
-            { len:11, required: true, message: '请输入11 位手机号', trigger: 'change'},
+            { required: true, pattern: /^\d{11}$/, message: '请输入11位数字', trigger: 'change'},
         ],
         code: [
             { required: true, pattern: new RegExp('^[0-9]{4}$'), message: '请输入4位数字验证码', trigger: 'change'},
@@ -150,6 +166,8 @@
             userPwd: form.value.password,
             userName: form.value.name,
             companyName: form.value.companyName,
+            legalPerson: form.value.legalPerson,
+            companyCode: form.value.companyCode,
             status: 0,
             tel: form.value.telNumber
         })
