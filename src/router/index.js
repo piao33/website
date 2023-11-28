@@ -81,6 +81,14 @@ const router = createRouter({
             },
             component: () => import('../views/platform/Dashboard.vue')
           },
+          {
+            path: 'chart',
+            name: 'chart',
+            meta: {
+              needLogin: true,
+            },
+            component: () => import('../views/platform/Chart.vue')
+          },
         ]
     },
     {

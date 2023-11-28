@@ -86,15 +86,10 @@
     import {useUserStore} from '@/stores/user'
 
     const store = useUserStore()
+    const router = useRouter()
     
-    let message = null;
     let clickData = ()=>{
-        if(message) return;
-        message = ElMessage({message: '敬请期待'})
-        setTimeout(() => {
-            message.close();
-            message = null;
-        }, 3000);
+        router.push({name: 'chart'})
     }
 
     // form表单校验提交
