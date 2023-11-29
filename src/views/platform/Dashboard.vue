@@ -179,6 +179,7 @@
             userName: form.value.name,
             userPwd: form.value.newPassword,
             userId: apiUserInfo.value.userId,
+            tel: form.value.telNumber
         })
         dialogVisible.value = false
         if(code == 200) {

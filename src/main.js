@@ -4,10 +4,13 @@ import { createApp } from 'vue'
 import { createPinia } from 'pinia'
 import App from './App.vue'
 import router from './router'
+import echarts from './echarts'
 
 import navVue from '@/components/nav.vue';
 
 const app = createApp(App)
+
+app.provide('$echarts', echarts)
 
 app.component('mNav', navVue)
 app.use(createPinia())
