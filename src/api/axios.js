@@ -7,6 +7,7 @@ const instance = axios.create({
     baseURL: import.meta.env.VITE_SERVER_API_URL,
     timeout: 10000,
     headers: {Content_type: 'application/x-www-form-urlencoded',},
+    withCredentials: true,
 });
 
 // 请求拦截器
@@ -17,7 +18,6 @@ instance.interceptors.request.use(function(config) {
     let user = JSON.parse(localStorage.getItem('user') || '{}')
     config.headers.tel = user.tel;
     config.headers.token = user.token;
-
     return config;
 },function(error){
     console.log(error)

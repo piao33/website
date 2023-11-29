@@ -1,6 +1,6 @@
 import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
-import { useRoute, useRouter } from "vue-router";
+import Cookies from 'js-cookie';
 
 export const useUserStore = defineStore('user', () => {
   let user = ref({})
@@ -9,6 +9,9 @@ export const useUserStore = defineStore('user', () => {
 
   function setUser(data) {
     let entries = Object.entries(data);
+    if(data.token) {
+      Cookies.set('Admin-Token', data.token)
+    }
     entries.forEach(item=>{
         if(!!item[1]){
             user.value[item[0]] = item[1]
@@ -19,6 +22,7 @@ export const useUserStore = defineStore('user', () => {
 
   function clearUser() {
     user.value = {}
+    Cookies.remove('Admin-token')
     localStorage.setItem('user', '{}')
   }
 

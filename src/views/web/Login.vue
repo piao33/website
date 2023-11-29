@@ -69,7 +69,6 @@
 </template>
 <script setup>
     import { useUserStore } from '@/stores/user';
-    import { storeToRefs } from 'pinia';
     import { computed, ref, reactive } from 'vue';
     import { useRouter, useRoute } from 'vue-router';
     import { loginApi, signInApi} from '@/api/user'
