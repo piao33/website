@@ -7,11 +7,11 @@
             </div>
             <div class="info">
                 <p class="title">区块链平台数据监测</p>
-                <p class="account">李磊 <span class="time">{{ localDate }}</span></p>
+                <p class="account"><span class="time">{{ localDate }}</span></p>
             </div>
             <div class="gobtn navbtn" @click="goBackend">
                 <img src="@/assets/svg/back.svg" alt="">
-                跳转去后台
+                数据后台
             </div>
         </nav>
         <ul class="card">
@@ -50,7 +50,8 @@
             <div class="table table1">
                 <div class="card-title"> XXXXXXXXXXXXXXX 表 1</div>
                 <el-table 
-                    :data="tableData2" 
+                    ref="table1ref"
+                    :data="tableData1" 
                     class="tb-con" 
                     :header-cell-style="{backgroundColor:'transparent'}" 
                     :header-row-style="{backgroundColor:'transparent'}" 
@@ -64,7 +65,8 @@
             <div class="table table2">
                 <div class="card-title"> XXXXXXXXXXXXXXX 表 2</div>
                 <el-table 
-                    :data="tableData1" 
+                    ref="table2ref"
+                    :data="tableData2" 
                     class="tb-con"
                     :header-cell-style="{backgroundColor:'transparent'}" 
                     :header-row-style="{backgroundColor:'transparent'}" 
@@ -85,6 +87,7 @@
     import { reactive, ref, computed } from 'vue';
     import { useRouter } from 'vue-router';
     import { useUserStore } from '@/stores/user'
+    import Scroll from '@/utils/tableScroll';
 
     const store = useUserStore()
     const router = useRouter()
@@ -95,15 +98,10 @@
     let timer = null
     let lineMode = ref('month')
     let localDate = ref(null)
+    let table1ref = ref(null)
+    let table2ref = ref(null)
 
     let tableData1 = ref([
-        {height: 123, hash: '51F61H7', deal: '12', createTime: '2023-11-30 12:23:32'},
-        {height: 123, hash: '51F61H7', deal: '12', createTime: '2023-11-30 12:23:32'},
-        {height: 123, hash: '51F61H7', deal: '12', createTime: '2023-11-30 12:23:32'},
-        {height: 123, hash: '51F61H7', deal: '12', createTime: '2023-11-30 12:23:32'},
-        {height: 123, hash: '51F61H7', deal: '12', createTime: '2023-11-30 12:23:32'},
-    ])
-    let tableData2 = ref([
         {type: '营销', num: '3234'},
         {type: '财务', num: '534'},
         {type: '电子交易', num: '2433'},
@@ -112,16 +110,27 @@
         {type: '碳排放', num: '334'},
         {type: '其他', num: '1234'},
     ])
+    let tableData2 = ref([
+        {height: 123, hash: '51F61H7', deal: '12', createTime: '2023-11-30 12:23:32'},
+        {height: 123, hash: '51F61H7', deal: '12', createTime: '2023-11-30 12:23:32'},
+        {height: 123, hash: '51F61H7', deal: '12', createTime: '2023-11-30 12:23:32'},
+        {height: 123, hash: '51F61H7', deal: '12', createTime: '2023-11-30 12:23:32'},
+        {height: 123, hash: '51F61H7', deal: '12', createTime: '2023-11-30 12:23:32'},
+    ])
 
-    
+    const table1Scroll = new Scroll()
+    const table2Scroll = new Scroll()
 
-    onMounted(()=>{
+    onMounted(async ()=>{
         initLine();
         initPie();
         getDate();
         timer = setInterval(() => {
             getDate()
         }, 500);
+
+        table1Scroll.scroll(table1ref.value.$refs.bodyWrapper)
+        table2Scroll.scroll(table2ref.value.$refs.bodyWrapper)
     })
 
     onUnmounted(()=>{
@@ -129,6 +138,9 @@
         myLineChart = null;
         myPieChart && myPieChart.dispose();
         myPieChart = null;
+
+        table1Scroll.clearScroll()
+        table2Scroll.clearScroll()
     })
 
     function getDate() {
@@ -163,7 +175,7 @@
                 top:60,
                 bottom: 30,
                 right: 30,
-                containLabel: true
+                // containLabel: true
             },
             xAxis: {
                 type: 'category',
@@ -287,14 +299,19 @@
     }
 
     nav{
-        padding: 4px 10px 0 10px;
-        height: 70px;
+        padding: 6px 10px 0 10px;
+        height: 40px;
         display: flex;
         align-items: center;
         justify-content: space-between;
         .navbtn{
             color: #BCBCBB;
             cursor: pointer;
+            border: 1px solid #FEBA63;
+            border-radius: 4px;
+            padding: 3px 8px;
+            display: flex;
+            align-items: center;
             img{
                 width: 20px;height: 20px;
                 vertical-align: top;
@@ -320,15 +337,22 @@
         .info{
             color: #BCBCBB;
             text-align: center;
+            display: flex;
+            align-items: center;
             .title{
                 font-size: 22px;
                 color: #FEBA63;
             }
             .account{
+                margin-left: 12px;
+                text-align: left;
+                color: #FEBA63;
+                width: 185px;
                 .time{
                     display: inline-block;
-                    width: 160px;
+                    white-space: nowrap;
                     text-align: left;
+                    font-size: 18px;
                 } 
                 
             }
@@ -427,7 +451,7 @@
         align-items: center;
     }
     .table{
-        height: calc(100vh - 670px); 
+        height: calc(100vh - 700px); 
         min-height: 300px;
         background-color: #474544;
         border-radius: 8px;
