@@ -451,7 +451,7 @@
         align-items: center;
     }
     .table{
-        height: calc(100vh - 700px); 
+        height: calc(100vh - 640px); 
         min-height: 300px;
         background-color: #474544;
         border-radius: 8px;
