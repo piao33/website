@@ -7,7 +7,7 @@
             </div>
             <div class="info">
                 <p class="title">区块链平台数据监测</p>
-                <p class="time"> 2023-11-29 14:34:32</p>
+                <p class="account">李磊 <span class="time">{{ localDate }}</span></p>
             </div>
             <div class="gobtn navbtn" @click="goBackend">
                 <img src="@/assets/svg/back.svg" alt="">
@@ -21,7 +21,7 @@
             </li>
             <li>
                 <p>今日上链</p>
-                <span>328</span>
+                <span>36</span>
             </li>
             <li>
                 <p>区块总高度 300</p>
@@ -34,39 +34,114 @@
         </ul>
         <div class="chartbox">
             <div class="linebox">
+                <div class="card-title"> XXXXXXXXXXXXXXX折线图</div>
+                <el-radio-group text-color="#fff" fill="#FEBA63" v-model="lineMode" label="" size="default" class="radio">
+                    <el-radio-button label="day">日</el-radio-button>
+                    <el-radio-button label="month">月</el-radio-button>
+                </el-radio-group>
                 <div id="line"></div>
             </div>
             <div class="piebox">
+                <div class="card-title">XXXXXXXXXXXXXXX饼图</div>
                 <div id="pie"></div>
             </div>
         </div>
         <div class="tablebox">
             <div class="table table1">
-
+                <div class="card-title"> XXXXXXXXXXXXXXX 表 1</div>
+                <el-table 
+                    :data="tableData2" 
+                    class="tb-con" 
+                    :header-cell-style="{backgroundColor:'transparent'}" 
+                    :header-row-style="{backgroundColor:'transparent'}" 
+                    :row-style="{backgroundColor:'transparent'}" 
+                    cell-class-name="cellClassName"
+                >
+                    <el-table-column prop="type" label="类型" />
+                    <el-table-column prop="num" label="上链数量" />
+                </el-table>
             </div>
             <div class="table table2">
-
+                <div class="card-title"> XXXXXXXXXXXXXXX 表 2</div>
+                <el-table 
+                    :data="tableData1" 
+                    class="tb-con"
+                    :header-cell-style="{backgroundColor:'transparent'}" 
+                    :header-row-style="{backgroundColor:'transparent'}" 
+                    :row-style="{backgroundColor:'transparent'}" 
+                    cell-class-name="cellClassName"
+                >
+                    <el-table-column prop="height" label="区块高度" />
+                    <el-table-column prop="hash" label="256哈希"/>
+                    <el-table-column prop="deal" label="交易"/>
+                    <el-table-column prop="createTime" label="生成时间" />
+                </el-table>
             </div>
         </div>
     </div>
 </template>
 
 <script setup>
-    import { reactive, ref } from 'vue';
+    import { reactive, ref, computed } from 'vue';
     import { useRouter } from 'vue-router';
-    import {useUserStore} from '@/stores/user'
+    import { useUserStore } from '@/stores/user'
 
     const store = useUserStore()
     const router = useRouter()
     const $echarts = inject('$echarts')
 
-    let myLineChart = ref(null)
-    let myPieChart = ref(null)
+    let myLineChart = null
+    let myPieChart = null
+    let timer = null
+    let lineMode = ref('month')
+    let localDate = ref(null)
+
+    let tableData1 = ref([
+        {height: 123, hash: '51F61H7', deal: '12', createTime: '2023-11-30 12:23:32'},
+        {height: 123, hash: '51F61H7', deal: '12', createTime: '2023-11-30 12:23:32'},
+        {height: 123, hash: '51F61H7', deal: '12', createTime: '2023-11-30 12:23:32'},
+        {height: 123, hash: '51F61H7', deal: '12', createTime: '2023-11-30 12:23:32'},
+        {height: 123, hash: '51F61H7', deal: '12', createTime: '2023-11-30 12:23:32'},
+    ])
+    let tableData2 = ref([
+        {type: '营销', num: '3234'},
+        {type: '财务', num: '534'},
+        {type: '电子交易', num: '2433'},
+        {type: '物资', num: '2234'},
+        {type: '新能源', num: '342'},
+        {type: '碳排放', num: '334'},
+        {type: '其他', num: '1234'},
+    ])
+
+    
 
     onMounted(()=>{
         initLine();
         initPie();
+        getDate();
+        timer = setInterval(() => {
+            getDate()
+        }, 500);
     })
+
+    onUnmounted(()=>{
+        myLineChart && myLineChart.dispose();
+        myLineChart = null;
+        myPieChart && myPieChart.dispose();
+        myPieChart = null;
+    })
+
+    function getDate() {
+        let d = new Date()
+        let year = d.getFullYear()
+        let month = (d.getMonth() + 1).toString().padStart(2, '0')
+        let day = d.getDate().toString().padStart(2, '0')
+        let hour = d.getHours().toString().padStart(2, '0')
+        let min = d.getMinutes().toString().padStart(2, '0')
+        let sec = d.getSeconds().toString().padStart(2, '0')
+
+        localDate.value = `${year}-${month}-${day} ${hour}:${min}:${sec}`
+    }
     
     const goBackend = () => {
         window.open('http://192.168.1.22/index')
@@ -77,37 +152,53 @@
 
     function initLine() {
         let chartDom = document.getElementById('line');
-        myLineChart.value = $echarts.init(chartDom);
+        myLineChart = $echarts.init(chartDom);
         let option = {
-            xAxis: {
-                type: 'category',
-                data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+            tooltip: {
+                trigger: 'axis',
+                confine: true,
             },
             grid: {
                 left: 40,
                 top:60,
                 bottom: 30,
-                right: 30
+                right: 30,
+                containLabel: true
+            },
+            xAxis: {
+                type: 'category',
+                data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
             },
             color: ['#FBAC08'],
             yAxis: {
-                type: 'value'
+                type: 'value',
+                axisLine: {
+                    show: true
+                },
+                splitLine: {
+                    lineStyle:{
+                        type: 'dashed',
+                        color: ['#ccc'],
+                    }
+                }
             },
             series: [
                 {
-                data: [150, 230, 224, 218, 135, 147, 260],
-                type: 'line'
+                    name: '123',
+                    data: [150, 230, 224, 218, 135, 147, 260],
+                    type: 'line',
+                    stack: 'Total'
                 }
             ]
         };
 
-        myLineChart.value.setOption(option);
+        myLineChart.setOption(option);
 
     }
 
     function initPie() {
         let chartDom = document.getElementById('pie');
-        myPieChart.value = $echarts.init(chartDom);
+        myPieChart = $echarts.init(chartDom);
         let option = {
             tooltip: {
                 trigger: 'item'
@@ -131,6 +222,8 @@
                 bottom: 0,
                 right: 0
             },
+            color: ['#FEBA63', '#5099BC', '#A1D8D3', '#80C687', '#285960', '#9287E7', '#FF7C7C'],
+            // color: ['#FEBA63', '#5099BC', '#A1D8D3', '#80C687', '#285960', '', ''],
             series: [
                 {
                 name: 'Access From',
@@ -139,8 +232,8 @@
                 avoidLabelOverlap: false,
                 itemStyle: {
                     borderRadius: 4,
-                    borderColor: '#ccc',
-                    borderWidth: 1
+                    borderColor: '#474544',
+                    borderWidth: 2
                 },
                 label: {
                     show: false,
@@ -169,63 +262,75 @@
             ]
         };
 
-        myPieChart.value.setOption(option);
+        myPieChart.setOption(option);
 
     }
 </script>
 
 <style lang="less" scoped>
+    :deep(.el-table__inner-wrapper::before){
+        height: 0;
+    }
+    :deep(.el-table th.el-table__cell.is-leaf){
+        border-bottom: 1px solid #6d6d63!important;
+    }
+    :deep(.cellClassName){
+        border-bottom: 1px solid #6d6d63!important;
+        color: #BCBCBB;
+    }
+    :deep(.el-radio-button__inner):hover{
+        color: #f7cb90;
+    }
     .chart-content{
         background-color: #0C0C0C;
         min-height: 100vh;
     }
 
     nav{
-        height: 30px;
-        background-color: #044474;
+        padding: 4px 10px 0 10px;
+        height: 70px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
         .navbtn{
-            position: absolute;
             color: #BCBCBB;
             cursor: pointer;
-            height: 20px;
-            line-height: 20px;
             img{
                 width: 20px;height: 20px;
                 vertical-align: top;
                 margin-right: 4px;
             }
             &:hover{
-                color: #A4E4BC;
+                color: #f7cb90;
             }
             &:active{
-                color: #048C04;
+                color: #FEBA63;
             }
         }
         .backbtn{
-            left:10px;
-            top: 5px;
-            
             display: flex;
             align-items: center;
         }
         .gobtn{
-            right: 10px;
-            top: 5px;
             img{
                 transform-origin: center;
                 transform: rotate(180deg)
             }
         }
         .info{
-            margin: 0 auto ;
             color: #BCBCBB;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            line-height: 30px;
+            text-align: center;
             .title{
-                font-size: 18px;
-                margin-right: 12px;
+                font-size: 22px;
+                color: #FEBA63;
+            }
+            .account{
+                .time{
+                    display: inline-block;
+                    width: 160px;
+                    text-align: left;
+                } 
+                
             }
         }
     }
@@ -238,10 +343,6 @@
             width: 24%;
             height: 120px;
             border-radius: 8px;
-            background-color: #D9BEF7;
-            // display: flex;
-            // align-items: center;
-            // justify-content: center;
             text-align: center;
             color: #fff;
             p{
@@ -253,14 +354,21 @@
             span{
                 font-size: 20px;
             }
+            &:nth-child(1){
+                // background: linear-gradient(60deg, #1b0a2e, #654887);
+                background: linear-gradient(60deg, #FEBA63, #ffd196);
+            }
             &:nth-child(2){
-                background-color: #A894E8;
+                // background: linear-gradient(60deg, #2e205a, #4f3996);
+                background: linear-gradient(60deg, #5099BC, #91bccf);
             }
             &:nth-child(3){
-                background-color: #7779EA;
+                // background: linear-gradient(60deg, #2d2e66, #616298);
+                background: linear-gradient(60deg, #285960, #55676b);
             }
             &:nth-child(4){
-                background-color: #5D82F4;
+                // background: linear-gradient(60deg, #1c2952, #324b96);
+                background: linear-gradient(60deg, #FF7C7C, #fb9494);
             }
         }
     }
@@ -269,12 +377,34 @@
         padding: 20px 20px 0 20px;
         align-items: center;
     }
+    .card-title{
+        position: absolute;
+        left: 20px;top: 10px;
+        color: #BCBCBB;
+        z-index: 100;
+        line-height: 16px;
+        &::after{
+            content: '';
+            position: absolute;
+            left: -10px;top:0;
+            width: 4px;
+            height: 100%;
+            background-color: #FEBA63;
+        }
+    }
     .linebox{
         height: 400px; 
         width: 60%;
         margin-right: 20px;
         background-color: #474544;
         border-radius: 8px;
+        position: relative;
+    }
+    .radio{
+        position: absolute;
+        right: 10px;
+        top: 10px;
+        z-index: 10;
     }
     .piebox{
         flex:1;
@@ -282,6 +412,7 @@
         background-color: #474544;
         border-radius: 8px;
         overflow: hidden;
+        position: relative;
     }
     #line{
         height: 100%;
@@ -296,9 +427,17 @@
         align-items: center;
     }
     .table{
-        height: 300px; 
+        height: calc(100vh - 670px); 
+        min-height: 300px;
         background-color: #474544;
         border-radius: 8px;
+        position: relative;
+        overflow: hidden;
+        .tb-con{
+            height: 100%;
+            padding-top: 34px;
+            background-color: transparent;
+        }
     }
     .table1{
         margin-right: 20px;
