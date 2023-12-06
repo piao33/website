@@ -10,6 +10,7 @@ import {
   DatasetComponent,
   TransformComponent,
   LegendComponent,
+  DataZoomComponent,
 } from 'echarts/components';
 // 标签自动布局、全局过渡动画等特性
 import { LabelLayout, UniversalTransition } from 'echarts/features';
@@ -24,6 +25,7 @@ echarts.use([
   DatasetComponent,
   TransformComponent,
   LegendComponent,
+  DataZoomComponent,
   BarChart,
   LineChart, 
   PieChart,
