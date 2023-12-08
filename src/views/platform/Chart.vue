@@ -45,7 +45,7 @@
                 <div class="chartbox">
                     <div class="linebox">
                         <div class="card-title">上链数据统计</div>
-                        <el-radio-group text-color="#fff" fill="#60ba9e" v-model="lineMode" label="" size="default"
+                        <el-radio-group text-color="#fff" fill="#2aa4f1" v-model="lineMode" label="" size="default"
                             class="radio">
                             <el-radio-button label="day">日</el-radio-button>
                             <el-radio-button label="month">月</el-radio-button>
@@ -199,7 +199,7 @@ function initLine() {
             boundaryGap: false,
             data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
         },
-        color: ['#60ba9e', '#476d9e'],
+        color: ['#2aa4f1', '#476d9e'],
         yAxis: {
             type: 'value',
             axisLine: {
@@ -219,8 +219,7 @@ function initLine() {
                 data: [150, 230, 424, 218, 135, 147, 260],
                 type: 'line',
                 smooth: true,
-                areaStyle: { normal: { color: ['rgba(255,255,255,0.1)'] } },
-
+                areaStyle: { color: 'rgba(255,255,255,0.1)' },
             },
         ]
     };
@@ -236,13 +235,12 @@ function initPie() {
         tooltip: {
             trigger: 'item'
         },
-        backgroundColor: '#1b1e25',
         legend: {
             orient: 'vertical',
             right: 10,
             y: 'center',
             textStyle: {
-                color: '#7c8081'
+                color: '#b3b3b3'
             },
             itemGap: 10,
             itemWidth: 10,
@@ -267,7 +265,7 @@ function initPie() {
                 avoidLabelOverlap: false,
                 itemStyle: {
                     borderRadius: 4,
-                    borderColor: '#1b1e25',
+                    borderColor: '#123a6c',
                     borderWidth: 2
                 },
                 label: {
@@ -310,7 +308,7 @@ function initBar() {
         legend: {
             data: ['类型1', '类型2', '类型3', '类型4'],
             textStyle: {
-                color: '#ffffff'
+                color: '#b3b3b3'
             },
             right: 10,
             itemWidth: 10,
@@ -400,15 +398,15 @@ function initBar() {
 
 :deep(.cellClassName) {
     border-bottom: 1px solid #2d2d2a !important;
-    color: #989399;
+    color: #b3b3b3;
 }
 
 :deep(.el-radio-button__inner):hover {
-    color: rgb(124 187 167);
+    color: #2aa4f1;
 }
 
 .chart-content {
-    background-color: #15181d;
+    background-color: #0d325f;
     min-height: 100vh;
 }
 
@@ -420,9 +418,8 @@ nav {
     justify-content: space-between;
 
     .navbtn {
-        color: #989399;
+        color: #b3b3b3;
         cursor: pointer;
-        // border-radius: 4px;
         padding: 3px 8px;
         display: flex;
         align-items: center;
@@ -435,11 +432,11 @@ nav {
         }
 
         &:hover {
-            color: #f7cb90;
+            color: #2aa4f1a3;
         }
 
         &:active {
-            color: #FEBA63;
+            color: #2aa4f1;
         }
     }
 
@@ -456,11 +453,10 @@ nav {
     }
 
     .info {
-        color: #989399;
         text-align: center;
         display: flex;
         align-items: center;
-        color: #60ba9e;
+        color: #2aa4f1;
         font-weight: 600;
 
         .title {
@@ -494,7 +490,7 @@ nav {
         height: 120px;
         text-align: center;
         color: #fff;
-        background-color: #1b1e25;
+        background-color: #123a6c;
         text-align: left;
         font-family: Arial, Helvetica, sans-serif;
         padding-left: 14px;
@@ -502,7 +498,7 @@ nav {
         p {
             font-size: 14px;
             margin-top: 16px;
-            color: #989399;
+            color: #b3b3b3;
             font-weight: 500;
         }
 
@@ -527,7 +523,7 @@ nav {
 
 .right-box {
     width: 360px;
-    background-color: #1b1e25;
+    background-color: #123a6c;
     margin: 14px 14px 14px 0;
     position: relative;
 }
@@ -542,10 +538,9 @@ nav {
     position: absolute;
     left: 10px;
     top: 10px;
-    font-size: 14px;
-    font-weight: 600;
-    ;
-    color: #989399;
+    font-size: 15px;
+    font-weight: 700;
+    color: #b3b3b3;
     z-index: 100;
     line-height: 16px;
 }
@@ -554,7 +549,7 @@ nav {
     height: 350px;
     width: 60%;
     margin-right: 14px;
-    background-color: #1b1e25;
+    background-color: #123a6c;
     position: relative;
 }
 
@@ -568,7 +563,7 @@ nav {
 .piebox {
     flex: 1;
     height: 350px;
-    background-color: #1b1e25;
+    background-color: #123a6c;
     overflow: hidden;
     position: relative;
 }
@@ -593,7 +588,7 @@ nav {
 
 .table {
     height: 350px;
-    background-color: #1b1e25;
+    background-color: #123a6c;
     position: relative;
     overflow: hidden;
 }
